@@ -82,6 +82,15 @@ async function decodeQR(page: Page): Promise<{ code: string; data: string }> {
   });
 
   return await page.evaluate(() => {
+    
+     // UPDATE - 23/02/2021: verificar se parou gerar qrcode, e se sim, 
+     //clicar sobre opção para continuar gerarando novos qrcodes 
+    if (document.querySelector('.n9gYh') !== null){
+        console.log('👨‍💻 Regenerating Qrcodes...')
+        setTimeout(function(){
+            document.querySelector('.n9gYh').click();
+        },1500); /* aguardar 1.5 segundos */                                
+    }
     const canvas = document.querySelector('canvas');
     const context = canvas.getContext('2d');
 
